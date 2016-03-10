@@ -1,15 +1,18 @@
 Summary:	A tiling terminal emulator based on GTK+ 3
 Name:		terminix
 Version:	0.52.1
-Release:	1%{dist}
+Release:	2%{dist}
 
 License:	MPLv2.0
 Group:		User Interface/Desktops
 URL:		http://github.com/gnunn1/terminix
 Source0:	https://github.com/gnunn1/%{name}/releases/download/%{version}/terminix.zip
 
+ExclusiveArch:	x86_64
+
 %description
-A tiling terminal emulator
+A tiling terminal emulator. This is binary repack for x86_64 from
+https://github.com/gnunn1/terminix/releases
 
 %prep
 
@@ -45,6 +48,9 @@ fi
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %changelog
+* Thu Mar 10 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-2.R
+- binary build exist only for x86_64
+
 * Thu Mar 10 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-1.R
 - update to 0.52.1
 
