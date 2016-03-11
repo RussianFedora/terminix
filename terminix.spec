@@ -1,13 +1,13 @@
 Summary:	A tiling terminal emulator based on GTK+ 3
 Name:		terminix
 Version:	0.52.1
-Release:	3%{dist}
+Release:	4%{dist}
 
 License:	MPLv2.0
 Group:		User Interface/Desktops
 URL:		http://github.com/gnunn1/terminix
 Source0:	https://github.com/gnunn1/%{name}/releases/download/%{version}/terminix.zip
-Source1:	com.gexperts.Terminix.gschema.xml
+Source1:	com.gexperts.Terminix.gschema.override
 
 ExclusiveArch:	x86_64
 
@@ -34,6 +34,7 @@ sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 %{_datadir}/applications/com.gexperts.Terminix.desktop
 %{_datadir}/dbus-1/services/*.service
 %{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.xml
+%{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.override
 %{_datadir}/nautilus-python/extensions/
 %{_datadir}/%{name}
 
@@ -50,6 +51,9 @@ fi
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %changelog
+* Fri Mar 11 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-4.R
+- use override file
+
 * Fri Mar 11 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-3.R
 - use dark theme by default
 - use Ctrl+` shortcut to view side bar

@@ -1,0 +1,6 @@
+[com.gexperts.Terminix.Settings]
+theme-variant='dark'
+menu-accelerator-enabled=false
+
+[com.gexperts.Terminix.Keybindings]
+win-view-sidebar='<Ctrl>grave'
