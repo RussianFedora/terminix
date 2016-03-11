@@ -1,12 +1,13 @@
 Summary:	A tiling terminal emulator based on GTK+ 3
 Name:		terminix
 Version:	0.52.1
-Release:	2%{dist}
+Release:	3%{dist}
 
 License:	MPLv2.0
 Group:		User Interface/Desktops
 URL:		http://github.com/gnunn1/terminix
 Source0:	https://github.com/gnunn1/%{name}/releases/download/%{version}/terminix.zip
+Source1:	com.gexperts.Terminix.gschema.xml
 
 ExclusiveArch:	x86_64
 
@@ -21,6 +22,7 @@ https://github.com/gnunn1/terminix/releases
 %install
 unzip -q -x -d %{buildroot} %{SOURCE0}
 strip -p %{buildroot}%{_bindir}/%{name}
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/glib-2.0/schemas/
 
 sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 	%{buildroot}%{_datadir}/applications/com.gexperts.Terminix.desktop
@@ -48,6 +50,11 @@ fi
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %changelog
+* Fri Mar 11 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-3.R
+- use dark theme by default
+- use Ctrl+` shortcut to view side bar
+- disable menu accelerator
+
 * Thu Mar 10 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.52.1-2.R
 - binary build exist only for x86_64
 
