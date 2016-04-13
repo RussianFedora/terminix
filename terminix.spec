@@ -1,6 +1,6 @@
 Summary:	A tiling terminal emulator based on GTK+ 3
 Name:		terminix
-Version:	0.56.0
+Version:	0.57.0
 Release:	1%{dist}
 
 License:	MPLv2.0
@@ -51,6 +51,9 @@ fi
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %changelog
+* Wed Apr 13 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.57.0-1.R
+- update 0.57.0
+
 * Tue Apr  5 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 0.56.0-1.R
 - update to 0.56.0
 
