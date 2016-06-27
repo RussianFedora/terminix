@@ -37,18 +37,24 @@ sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 %{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.override
 %{_datadir}/nautilus-python/extensions/
 %{_datadir}/%{name}
+%{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix.png
+%{_datadir}/appdata/com.gexperts.Terminix.appdata.xml
 
 %post
 update-desktop-database &> /dev/null || :
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+  /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+  /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
 
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %changelog
 * Mon Jun 27 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 1.0.0-1
