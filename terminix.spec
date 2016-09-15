@@ -27,6 +27,8 @@ install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/glib-2.0/schemas/
 sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 	%{buildroot}%{_datadir}/applications/com.gexperts.Terminix.desktop
 
+mv %{buildroot}%{_datadir}/metainfo %{buildroot}%{_datadir}/appdata
+
 %find_lang %{name}
 
 %files -f %{name}.lang
@@ -37,7 +39,7 @@ sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 %{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.override
 %{_datadir}/nautilus-python/extensions/
 %{_datadir}/%{name}
-%{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix.png
+%{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix*
 %{_datadir}/appdata/com.gexperts.Terminix.appdata.xml
 
 %post
