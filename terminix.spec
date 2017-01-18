@@ -41,6 +41,7 @@ mv %{buildroot}%{_datadir}/metainfo %{buildroot}%{_datadir}/appdata
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix*
 %{_datadir}/appdata/com.gexperts.Terminix.appdata.xml
+%{_mandir}/man1/%{name}.1*
 
 %post
 update-desktop-database &> /dev/null || :
