@@ -59,7 +59,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %changelog
-* Wed Jan 12 2017 Arkady L. Shane <ashejn@russianfedora.pro> - 1.4.2-1
+* Wed Jan 18 2017 Arkady L. Shane <ashejn@russianfedora.pro> - 1.4.2-1
 - update to 1.4.2
 
 * Wed Oct 12 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 1.3.0-1
