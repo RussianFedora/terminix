@@ -1,47 +1,49 @@
 Summary:	A tiling terminal emulator based on GTK+ 3
 Name:		terminix
-Version:	1.4.2
+Version:	1.5.2
 Release:	1%{dist}
 
 License:	MPLv2.0
 Group:		User Interface/Desktops
 URL:		http://github.com/gnunn1/terminix
-Source0:	https://github.com/gnunn1/%{name}/releases/download/%{version}/terminix.zip
+Source0:	https://github.com/gnunn1/terminix/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:	com.gexperts.Terminix.gschema.override
 
-ExclusiveArch:	x86_64
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gettext-devel
+BuildRequires:	ldc >= 1.1.1
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gtkd-3)
+BuildRequires:	pkgconfig(vted-3)
+BuildRequires:	pkgconfig(x11)
 
 %description
 A tiling terminal emulator. This is binary repack for x86_64 from
 https://github.com/gnunn1/terminix/releases
 
 %prep
+%autosetup
 
 %build
+find po -name "*\.po" -printf "%f\\n" | sed "s/\.po//g" | sort > po/LINGUAS
+autoreconf -fi
+%configure
+%make_build
 
 %install
-unzip -q -x -d %{buildroot} %{SOURCE0}
-strip -p %{buildroot}%{_bindir}/%{name}
+%make_install
+
 install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/glib-2.0/schemas/
 
 sed -i 's@Categories.*@Categories=GNOME;GTK;System;TerminalEmulator;@g' \
 	%{buildroot}%{_datadir}/applications/com.gexperts.Terminix.desktop
 
 mv %{buildroot}%{_datadir}/metainfo %{buildroot}%{_datadir}/appdata
+chmod +x %{buildroot}%{_datadir}/%{name}/scripts/terminix_int.sh
 
 %find_lang %{name}
-
-%files -f %{name}.lang
-%{_bindir}/%{name}
-%{_datadir}/applications/com.gexperts.Terminix.desktop
-%{_datadir}/dbus-1/services/*.service
-%{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.xml
-%{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.override
-%{_datadir}/nautilus-python/extensions/
-%{_datadir}/%{name}
-%{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix*
-%{_datadir}/appdata/com.gexperts.Terminix.appdata.xml
-%{_mandir}/man1/%{name}.1*
 
 %post
 update-desktop-database &> /dev/null || :
@@ -59,7 +61,25 @@ fi
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
+%files -f %{name}.lang
+%license LICENSE
+%doc README.md CREDITS.md 
+%{_bindir}/%{name}
+%{_datadir}/applications/com.gexperts.Terminix.desktop
+%{_datadir}/dbus-1/services/*.service
+%{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.xml
+%{_datadir}/glib-2.0/schemas/com.gexperts.Terminix.gschema.override
+%{_datadir}/nautilus-python/extensions/
+%{_datadir}/%{name}
+%{_datadir}/icons/hicolor/*/apps/com.gexperts.Terminix*
+%{_datadir}/appdata/com.gexperts.Terminix.appdata.xml
+%{_mandir}/man1/%{name}.1*
+
 %changelog
+* Tue Mar  7 2017 Arkady L. Shane <ashejn@russianfedora.pro> - 1.5.2-1
+- update to 1.5.2
+- build from sources for Fedora 26+
+
 * Wed Jan 18 2017 Arkady L. Shane <ashejn@russianfedora.pro> - 1.4.2-1
 - update to 1.4.2
 
